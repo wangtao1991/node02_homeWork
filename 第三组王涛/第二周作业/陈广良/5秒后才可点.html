@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="firstctrl">
+    <button class="btn btn-info" ng-disabled="flag" ng-click="check()">{{tmp}}</button>
+</div>
+<script src="angular.js"></script>
+<script>
+    //获取验证码 5秒内不再点击 并且倒计时
+    var app = angular.module('appModule', []);
+    app.controller('firstctrl', function ($scope, $interval) {
+        $scope.tmp = '点击我获取验证码';
+        $scope.check = function () {
+            $scope.tmp =5;
+            $scope.flag = true;
+            $interval(function () {
+                if($scope.tmp>0){
+                    $scope.tmp --;
+                }else{
+                    $scope.tmp = '重新获取验证码';
+                    $scope.flag = false;
+                    $interval.cancel();
+                }
+            }, 1000);
+        };
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
